@@ -177,11 +177,7 @@ public IActionResult SupportProject(int projectId, ViewInfoProject viewInfoProje
 {
     int? userId = HttpContext.Session.GetInt32("UserId");
 
-    if (donations < 0)
-    {
-        ModelState.AddModelError("Donations", "Donation amount cannot be below 0.");
-        return View();
-    }
+   
 
     if (!userId.HasValue)
     {
@@ -207,7 +203,7 @@ public IActionResult SupportProject(int projectId, ViewInfoProject viewInfoProje
         {
             UserId = actualUserId,
             ProjectId = projectId,
-            Donations = donations  // Use the validated 'donations' value here
+            Donations= viewInfoProject.suporters.Donations// Use the validated 'donations' value here
         };
         _context.Suporters.Add(newSuporter);
         _context.SaveChanges();
