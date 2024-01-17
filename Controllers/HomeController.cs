@@ -203,15 +203,15 @@ public IActionResult SupportProject(int projectId, ViewInfoProject viewInfoProje
         {
             UserId = actualUserId,
             ProjectId = projectId,
-            Donations= viewInfoProject.suporters.Donations// Use the validated 'donations' value here
+            Donations= viewInfoProject.suporters.Donations
         };
         _context.Suporters.Add(newSuporter);
         _context.SaveChanges();
 
-        // Set UserHasSupported based on whether the user has now supported the project
+        
         viewInfoProject.UserHasSupported = true;
 
-        // Store the information in the session
+        
         HttpContext.Session.SetInt32($"UserHasSupported_{actualUserId}_{projectId}", 1);
 
         return RedirectToAction("ProjectDetails", new { projectId = projectId });
